@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Time-Table</title>
+        <meta name="time-table"/>
+        <meta content="time table"/>
+        <link rel="stylesheet" type="text/css" href="/home/d4mz3y/Documents/timetable/style.css"/>
+        <script type="text\javascript" src="/home/d4mz3y/Documents/timetable/edit.js"></script>
+        <meta content="index, follow" name="robot">
+        <meta content="initial-scale=1" name="viewport">
+        <meta content="editable time-table" name="description">
+        <meta content="d4mz3y" name="author">
+        <meta content="no-cache" name="pragma">
+    </head>
+    <body onload="alert ('Page is still in beta! \n Enable desktop site to view properly!')">
+        <div class="header">
+            <span id="head">my time-table</span>
+            <div id="nav">
+                <a id="nav" href="#">Home</a>
+                <a id="nav" href="#">Articles</a>
+                <a id="nav" href="#">Author</a>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <hr/>
+        </div> 
+        <div id="share"> 
+            <p><a id="sticky" href="https://www.facebook.com/d4mz3y/" id="facebook"><img src="/home/d4mz3y/Documents/timetable/facebook.svg"/></a></p>
+            <p><a id="sticky" href="https://twitter.com/damzey_damien" id="twitter"><img src="/home/d4mz3y/Documents/timetable/twitter.svg"/></a></p> 
+            <p><a id="sticky" href="https://www.instagram.com/_damzey_/" id="instagram"><img src="/home/d4mz3y/Documents/timetable/instagram-sketched.svg"/></a></p>
+            <p><a id="sticky" href="https://wa.me/2348068667823" id="whatsapp"><img src="/home/d4mz3y/Documents/timetable/whatsapp.svg"/></a></p>
+            <p><a id="sticky" href="mailto:anonymousd4mz3y@gmail.com" id="gmail"><img src="/home/d4mz3y/Documents/timetable/gmail.svg"/></a></p>
+        </div>
+        <div class="container">
+            <table class="table" id="editTd" spellcheck="true">
+                <tr>
+                     <th></th>
+                     <th scope="col">12:00 - 1:00pm</th>
+                     <th scope="col">1:00pm - 2:00pm</th>
+                </tr>
+                  <tr>
+                      <th>Monday</th>
+                     <td>cmp 218</td>
+                     <td>cmp 252</td>
+                 </tr>
+                 <tr>
+                     <th>Tuesday</th>
+                     <td>cmp 202</td>
+                     <td>cmp 254</td>
+                 </tr> 
+                 <tr>
+                     <th>Wednesday</th>
+                     <td>cmp 212</td>
+                     <td>cmp 214</td>
+                 </tr>
+                 <tr>
+                     <th>Thursday</th>
+                     <td>cmp 233</td>
+                     <td>cmp 222</td>
+                 </tr>
+                 <tr>
+                     <th>Friday</th>
+                     <td>cmp 242</td>
+                     <td>Git 204</td>
+                 </tr>
+                 <tr>
+                     <th>Saturday</th>
+                     <td>GST 210</td>
+                     <td>sta 202</td>
+                 </tr>
+            </table>
+            <span>PS:The table is editable</span>
+            <button id="editBtn" type="button">Tap to edit table!</button> 
+            <div id="editP">
+                <div>
+                    <span id="edit">PS:The table is editable</span>
+                </div>
+            </div>
+            <div id="editFooter">
+                <footer>
+                    <p id="footer">created by d4mz3y</p>
+                </footer>
+            </div>
+        </div>
+    </body>
+    <script>
+        var editBtn = document.getElementById('editBtn');
+        var editables = document.querySelectorAll('#editTd, #editP, #editFooter')
+ 
+        editBtn.addEventListener('click', function(e) {
+            if (!editables[0].isContentEditable) {
+                editables[0].contentEditable = 'true';
+                editables[1].contentEditable = 'true';
+                editables[2].contentEditable = 'true';
+                editBtn.innerHTML = 'Save Changes';
+                editBtn.style.backgroundColor = 'green';
+            } else {
+                // Disable Editing
+                editables[0].contentEditable = 'false';
+                editables[1].contentEditable = 'false';
+                editables[2].contentEditable = 'false';
+                alert ('changes saved successfully');
+                // Change Button Text and Color
+                editBtn.innerHTML = 'Tap to edit table!';
+                editBtn.style.backgroundColor = '#000000';
+                // Save the data in localStorage 
+                for (var i = 0; i < editables.length; i++) {
+                localStorage.setItem(editables[i].getAttribute('id'), editables[i].innerHTML);
+                }
+            }
+            });
+    </script>
+
+    <script>
+        if (typeof(Storage) !== "undefined") {
+ 
+            if (localStorage.getItem('editTd') !== null) {
+            editables[0].innerHTML = localStorage.getItem('editTd');
+            }
+            
+            if (localStorage.getItem('editP') !== null) {
+            editables[1].innerHTML = localStorage.getItem('editP');
+            }
+            
+            if (localStorage.getItem('editFooter') !== null) {
+            editables[2].innerHTML = localStorage.getItem('editFooter');
+            } 
+            }
+    </script>
+    <script>
+        setInterval(function() {
+            for (var i = 0; i < editables.length; i++) {
+                localStorage.setItem(editables[i].getAttribute('id'), editables[i].innerHTML);
+            }
+            }, 5000);
+    </script>
+</html>
